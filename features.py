@@ -2,86 +2,14 @@ current_weapon = 0
 weapon_color = (1.0, 0.0, 0.0)
 boss_gear_color = (0.2, 0.4, 0.2)
 start_time = 0
-def draw_BIG_BOSS():
-    glPushMatrix()
-    glTranslatef(200, 200, 0)
-
-    #body
-    glColor3f(*boss_gear_color)  # military gear color
-    glutSolidCube(80)
-
-
-    #head
-    glPushMatrix()
-    glTranslatef(0, 0, 60) #head position
-    glColor3f(0.8, 0.6, 0.4)
-    glutSolidSphere(25, 10, 10)
-
-    #Helmet
-    glColor3f(0.3, 0.5, 0.2) # dark green
-    glTranslatef(0, 0, 15)
-    glutSolidSphere(28, 12, 12)
-    glPopMatrix()
-
-    #legs
-    glColor3f(*boss_gear_color)
-    glPushMatrix()
-    glTranslatef(-20, 0, -60)
-    glutSolidCube(30) #left
-    glTranslatef(40, 0, 0)
-    glutSolidCube(30) #right
-    glPopMatrix()
-
-    #arms
-    glColor3f(*boss_gear_color)
-    #left
-    glPushMatrix()
-    glTranslatef(-50, 0, 20)
-    glRotatef(-30, 0, 1, 0)
-    gluCylinder(gluNewQuadric(), 15, 10, 70, 10, 10)
-    glPopMatrix()
-    #right
-    glPushMatrix()
-    glTranslatef(60, 0, 20)
-    glRotatef(30, 0, 1, 0)
-    gluCylinder(gluNewQuadric(), 15, 10, 70, 10, 10)
-    glPopMatrix()
-
-    #boots
-    glColor3f(0.4, 0.3, 0.1)
-    glPushMatrix()
-    glTranslatef(-20, 0, -90)
-    glutSolidCube(35) #left boot
-    glTranslatef(40, 0, 0)
-    glutSolidCube(35) #right boot
-    glPopMatrix()
-
-    #belt
-    glColor3f(0.4, 0.3, 0.1)
-    glPushMatrix()
-    glTranslatef(0, 0, -20)
-    glutSolidCube(50)
-    glPopMatrix()
-
-    #wielding weapon
-    glPushMatrix()
-    glTranslatef(60, 0, 20)
-    glColor3f(0.3, 0.3, 0.3)  # metal color
-    glRotatef(90, 0, 1, 0)
-    gluCylinder(gluNewQuadric(), 8, 8, 50, 10, 10) #barrel
-    glTranslatef(0, 0, 50)
-    glutSolidSphere(10, 10, 10) #gun tip
-    glPopMatrix()
-
-    glPopMatrix()
 
 def draw_weapon():
-    glPushMatrix()
-    glTranslatef(-200, -200, 0)
-    #var value
+    glColor3f(*weapon_color)
+    #glPushMatrix()
+    #glTranslatef(-200, -200, 0)
     #basic weapon: pistol
     if current_weapon == 0:
-        glColor3f(*weapon_color)  # metal color
+        #glColor3f(*weapon_color)  # metal color
         glRotatef(90, 0, 1, 0)
         gluCylinder(gluNewQuadric(), 8, 8, 50, 10, 10)  # barrel
         glTranslatef(0, 0, 50)
@@ -92,7 +20,7 @@ def draw_weapon():
 
     #weapon2: rifle
     elif current_weapon == 1:
-        glColor3f(*weapon_color)  # metal color
+        #glColor3f(*weapon_color)  # metal color
         glRotatef(90, 0, 1, 0)
         gluCylinder(gluNewQuadric(), 10, 10, 100, 10, 10)  # barrel
         glTranslatef(0, 0, 100)
@@ -103,7 +31,7 @@ def draw_weapon():
 
     #shotgun
     elif current_weapon == 2:
-        glColor3f(*weapon_color)  # metal color
+        #glColor3f(*weapon_color)  # metal color
         glRotatef(90, 0, 1, 0)
         gluCylinder(gluNewQuadric(), 15, 15, 70, 10, 10)  # barrel
         glTranslatef(0, 0, 70)
@@ -112,7 +40,77 @@ def draw_weapon():
         glTranslatef(-25, 0, 0)
         glutSolidCube(35)  # handle
 
+def draw_BIG_BOSS():
+    glPushMatrix()
+    glTranslatef(0, 0, 0)
+    glColor3f(*boss_gear_color)  # military gear color
+    #body
+    glPushMatrix()
+    glutSolidCube(80)
     glPopMatrix()
+
+    #head
+    glPushMatrix()
+    glTranslatef(0, 0, 100) #head position
+    glColor3f(0.8, 0.6, 0.4)
+    glutSolidSphere(25, 20, 20)
+
+    #Helmet
+    glColor3f(0.3, 0.5, 0.2) # dark green
+    glTranslatef(0, 0, 15)
+    glutSolidSphere(28, 20, 20)
+    glPopMatrix()
+
+    #legs
+    glColor3f(*boss_gear_color)
+    glPushMatrix()
+    glTranslatef(-20, 0, -80)
+    glutSolidCube(50) #left
+    glTranslatef(40, 0, 0)
+    glutSolidCube(50) #right
+    glPopMatrix()
+
+    #arms
+    glColor3f(*boss_gear_color)
+    #left
+    glPushMatrix()
+    glTranslatef(-60, 0, 20)
+    glRotatef(-30, 0, 1, 0)
+    gluCylinder(gluNewQuadric(), 15, 10, 70, 10, 10)
+    glPopMatrix()
+    #right
+    glPushMatrix()
+    glTranslatef(60, 0, 20)
+    glRotatef(30, 0, 1, 0)
+    gluCylinder(gluNewQuadric(), 15, 10, 70, 10, 10)
+    glPopMatrix()
+
+    # Weapon attached to right hand (end of arm)
+    glPushMatrix()
+    glTranslatef(0, 0, 70)  # move to hand position
+    draw_weapon()
+    glPopMatrix()
+
+    glPopMatrix()
+    
+    #boots
+    glColor3f(0.4, 0.3, 0.1)
+    glPushMatrix()
+    glTranslatef(-20, 0, -130)
+    glutSolidCube(35) #left boot
+    glTranslatef(40, 0, 0)
+    glutSolidCube(30) #right boot
+    glPopMatrix()
+
+    #belt
+    glColor3f(0.4, 0.3, 0.1)
+    glPushMatrix()
+    glTranslatef(0, 0, -20)
+    glutSolidCube(50)
+    glPopMatrix()
+
+    glPopMatrix()
+
 
 def keyboardListener(key, x, y):
     global current_weapon, weapon_color, boss_gear_color
